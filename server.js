@@ -1,3 +1,4 @@
+require('dotenv').config()
 // firstly we will create the express server
 // for that we will first have to import the express module
 
@@ -17,6 +18,14 @@ const PORT = process.env.PORT || 3000;
 
 const mongoose = require("mongoose");
 
+const session = require("express-session");
+
+const flash = require("express-flash");
+
+app.use(session({ secret: 'somevalue' }));
+//above line is used to resolve the error on the web page
+//"ERROR: secret option required for sessions"
+
 //Database Connection
 
 //snippet for connection to MongoDB that we use every time
@@ -29,7 +38,38 @@ mongoose.connect(url).then(() => console.log("Connected!"));
 //   console.log('Database connected...');
 // }).catch(err => {
 //   console.log('Connection failed...')
-// }); 
+// });
+
+
+//session config
+//session library works as a middleware
+app.use(session({
+  secret: process.env.COOKIE_SECRET, 
+  //we generally store the encrypted code outside our main code
+  // for this we require the package dotenv
+  //to access the .env we have to import the module
+  //secret is used to encrypt the session
+  //sessions does not work without cookies
+  resave: false,
+  saveUninitialized: false,
+  // store: mongoStore,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }
+  // cookie age in ms
+}))
+
+
+//how do the sessions work?
+//user sends the https request to server
+//server issues the session id
+//session id is unique for each client
+//or we can also store using the files
+//another option is the database
+//for this project also we are storing our session inside the database
+//we require the package express flash
+
+
+//will use flash as a middleware
+app.use(flash());
 
 //Assets
 app.use(express.static("public"));

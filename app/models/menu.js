@@ -7,7 +7,7 @@ const Schema = mongoose.Schema
 //javascript has a naming scheme
 //if the first letter is capital means that the thing that is stored is either class or constructor function
 
-const mentSchema = new Schema({
+const menuSchema = new Schema({
     name: {type: String, required: true},
     image: {type: String, required: true},
     price: {type: Number, required: true},
@@ -15,7 +15,7 @@ const mentSchema = new Schema({
 })
 // this is the schema of the document in the database
 
-const Menu = mongoose.model('Menu',mentSchema)
+const Menu = mongoose.model('Menu',menuSchema)
 //name of model - 'Menu' first letter should always be capital
 //name of collection created in database would be the plural of the model
 

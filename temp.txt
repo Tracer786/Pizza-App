@@ -13,3 +13,4 @@ If we are using NPM we will get the entry as package-json.lock
 
 
 
+to add all the node modules if you have deleted them just write the command 'yarn install'
