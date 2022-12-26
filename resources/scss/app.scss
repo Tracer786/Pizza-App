@@ -1,4 +1,6 @@
 @import './variables';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 body {
     font-family: 'Lato', sans-serif;
@@ -49,8 +51,12 @@ nav{
    &:hover{
      background: $primary;
      border-color: $pure;
-     color:$pure;
+    //  color:$pure;
+     color:black;
    } 
+   &:focus{
+    outline: none;
+   }
 }
 
 .btn-primary{
@@ -77,4 +83,12 @@ section.login{
             color: $primary-hover;
         }
     }
+}
+
+.noty_theme__mint{
+    width: 200px;
+    border-radius: 50px!important;
+    padding-left: 14px!important;
+    // border-color: rgb(0, 21, 255);
+    // border-width: 2px;
 }

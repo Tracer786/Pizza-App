@@ -29,7 +29,9 @@ function homeController() {
 
       const pizzas = await Menu.find()
       //for using await the function must be asynchronous
-      console.log(pizzas)
+      
+      // console.log(pizzas)
+
       return res.render("home", { pizzas: pizzas })
 
 

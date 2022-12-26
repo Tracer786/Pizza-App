@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 // app is variable
 // express is the function used
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 const session = require("express-session");
 const flash = require("express-flash");
 // const MongoDbStore = require("connect-mongo")
@@ -33,7 +34,8 @@ const MongoDbStore = require("connect-mongo")(session)
 
 // const url = "mongodb://localhost/pizza";
 const url = "mongodb://0.0.0.0:27017/pizza";
-mongoose.connect(url).then(() => console.log("Connected!"));
+// mongoose.connect(url).then(() => console.log("Connected!"));
+mongoose.connect(url,{useNewUrlParser: true}).then(() => console.log("Connected!"));
 // mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
 const connection = mongoose.connection;
 // connection.once('open', () => {
@@ -90,6 +92,13 @@ app.use(express.static("public"));
 //this will set the public folder as a whole for the designing purpose
 
 app.use(express.json())
+
+//Global Middlewares
+app.use((req,res,next) => {
+  res.locals.session = req.session  
+  next()
+  // we have to call the callback function,otherwise the request would never be completed
+})
 
 //set template engine
 app.use(expressLayout);

@@ -65,8 +65,15 @@
           <li class="ml-6"><a href="/register">Register</a></li>
           <li class="ml-6"><a href="/login">Login</a></li>
           <li class="ml-6">
-            <a href="/cart" class="inline-block px-6 py-2 rounded-full"
-              ><img src="/img/cart.png" alt=""
+            <a
+              href="/cart"
+              class="inline-block px-4 py-2 rounded-full flex items-center"
+            >
+              <span id="cartCounter" class="text-black font-bold pr-1"><%=session.cart ? session.cart.totalQty : ''%></span>
+              <!-- the embedded ejs will not work directly -->
+              <!-- to make it work we have to enable the global middlewares in the file server.js -->
+              <!-- to display the animated message of adding the item we are using the library noty -->
+              <img src="/img/cart.png" alt=""
             /></a>
           </li>
           <!-- ml-6 is also a bulit in class in tailwind css to give the spacing between items -->
