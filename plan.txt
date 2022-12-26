@@ -41,3 +41,13 @@ Create orders view with table for customer and admin
 Create orders single page with status 
 Create login page with route
 Create register page with route
+
+//Login and Sign Up
+
+Build Register crud
+    ---dependencies express-flash express-session dotenv
+    ---status code article https://www.restapitutorial.com/httpstatuscodes.html
+Build login page using passport
+    ---install dependencies passport passport-local express-session
+
+

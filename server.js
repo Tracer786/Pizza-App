@@ -91,7 +91,9 @@ app.use(session({
 app.use(express.static("public"));
 //this will set the public folder as a whole for the designing purpose
 
-app.use(express.json())
+
+app.use(express.urlencoded({ extended: false}))//this is for the url encoded registration data
+app.use(express.json())//this is for the json data for the cart
 
 //Global Middlewares
 app.use((req,res,next) => {
