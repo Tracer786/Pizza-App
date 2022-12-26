@@ -1,3 +1,7 @@
+//here the version of the connect-mongo is 4 but we need to use the 3 one
+//to install the previous version just write the command
+//yarn add connect-mongo@3
+
 require('dotenv').config()
 // firstly we will create the express server
 // for that we will first have to import the express module
@@ -16,9 +20,10 @@ const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("express-flash");
-const MongoDbStore = require("connect-mongo")
+// const MongoDbStore = require("connect-mongo")
+const MongoDbStore = require("connect-mongo")(session)
 
-app.use(session({ secret: 'somevalue' }));
+// app.use(session({ secret: 'somevalue' }))
 //above line is used to resolve the error on the web page
 //"ERROR: secret option required for sessions"
 
@@ -26,7 +31,8 @@ app.use(session({ secret: 'somevalue' }));
 
 //snippet for connection to MongoDB that we use every time
 
-const url = "mongodb://localhost/pizza";
+// const url = "mongodb://localhost/pizza";
+const url = "mongodb://0.0.0.0:27017/pizza";
 mongoose.connect(url).then(() => console.log("Connected!"));
 // mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
 const connection = mongoose.connection;
@@ -39,16 +45,21 @@ const connection = mongoose.connection;
 
 //session store
 let mongoStore = new MongoDbStore({
-  mongoUrl: url,
+  // mongoUrl: url,
+  mongooseConnection: connection,
   collection: 'sessions',
   //this will create the sessions collection in our database
 });
 
 
+
+//will use flash as a middleware
+app.use(flash());
+
 //session config
 //session library works as a middleware
 app.use(session({
-  secret: process.env.COOKIE_SECRET, 
+  secret: 'abc'||process.env.COOKIE_SECRET, 
   //we generally store the encrypted code outside our main code
   // for this we require the package dotenv
   //to access the .env we have to import the module
@@ -58,6 +69,7 @@ app.use(session({
   saveUninitialized: false,
   store: mongoStore,
   cookie: { maxAge: 1000 * 60 * 60 * 24 }
+  // cookie: { maxAge: 1000 *15 }
   // cookie age in ms
 }))
 
@@ -72,12 +84,12 @@ app.use(session({
 //we require the package express flash
 
 
-//will use flash as a middleware
-app.use(flash());
 
 //Assets
 app.use(express.static("public"));
 //this will set the public folder as a whole for the designing purpose
+
+app.use(express.json())
 
 //set template engine
 app.use(expressLayout);

@@ -31,6 +31,8 @@ function initRoutes(app) {
     
     app.get('/register',authController().register)
     
+    app.post('/update-cart',cartController().update)
+    //updating the cart in the sessions using the app.js
 }
 
 //this exported module would be imported in the server.js
