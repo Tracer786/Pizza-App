@@ -36,9 +36,6 @@ Add to cart functionality
     ---axios to send ajax request
     ---install notification library npm i noty https://ned.im/noty/#/
 
-Create Order controller and link it in server.js file
-Create orders view with table for customer and admin
-Create orders single page with status 
 Create login page with route
 Create register page with route
 
@@ -50,4 +47,7 @@ Build Register crud
 Build login page using passport
     ---install dependencies passport passport-local express-session
 
+Create Order controller and link it in server.js file
+Create orders view with table for customer and admin
+Create orders single page with status 
 

@@ -23,6 +23,7 @@
           <span class="font-bold text-lg">₹<%= pizza.item.price * pizza.qty%></span>
         </div>
       <%}%>
+    </div>
       <!-- <div class="flex items-center my-8">
         <img class="w-24" src="/img/pizza.png" alt="pizza" />
         <div class="flex-1 ml-4">
@@ -51,20 +52,23 @@
           <span class="text-lg font-bold">Total Amount:</span>
           <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice%></span>
         </div>
+        <% if(user) {%>
         <div>
-          <form action="" class="mt-8">
-            <input class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone Number">
-            <input class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address">
+          <form action="/orders" method="POST" class="mt-8">
+            <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone Number">
+            <input name="address" class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address">
             <div>
-              <!-- <button class="btn-primary px-6 py-2 rounded-full text-black font-bold mt-6" type="submit">Order Now</button> -->
+              <button class="btn-primary px-6 py-2 rounded-full text-black font-bold mt-6" type="submit">Order Now</button>
               <!-- we have kept the button under div, becuase div is a block element so the button will appear in the next line -->
             </div>
           </form>
         </div>
-        <a href="" class="inline-block cursor-pointer px-6 btn-primary py-2 rounded-full text-black font-bold mt-6">Login to Continue</a>
+        <%}else{%>
+        <a href="/login" class="inline-block cursor-pointer px-6 btn-primary py-2 rounded-full text-black font-bold mt-6">Login to Continue</a>
+        <% } %>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
   <%}else{%>
     <div class="empty-cart py-4">
       <div class="container mx-auto text-center">
