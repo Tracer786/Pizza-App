@@ -23,6 +23,7 @@ const session = require("express-session");
 const flash = require("express-flash");
 // const MongoDbStore = require("connect-mongo")
 const MongoDbStore = require("connect-mongo")(session)
+const passport = require("passport")
 
 // app.use(session({ secret: 'somevalue' }))
 //above line is used to resolve the error on the web page
@@ -68,13 +69,19 @@ app.use(session({
   //secret is used to encrypt the session
   //sessions does not work without cookies
   resave: false,
-  saveUninitialized: false,
+  // saveUninitialized: false,
+  saveUninitialized: true,
   store: mongoStore,
   cookie: { maxAge: 1000 * 60 * 60 * 24 }
   // cookie: { maxAge: 1000 *15 }
   // cookie age in ms
 }))
 
+//passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 
 //how do the sessions work?
 //user sends the https request to server
@@ -98,6 +105,7 @@ app.use(express.json())//this is for the json data for the cart
 //Global Middlewares
 app.use((req,res,next) => {
   res.locals.session = req.session  
+  res.locals.user = req.user
   next()
   // we have to call the callback function,otherwise the request would never be completed
 })
