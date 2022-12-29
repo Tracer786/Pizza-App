@@ -92,3 +92,14 @@ section.login{
     // border-color: rgb(0, 21, 255);
     // border-width: 2px;
 }
+
+a.link{
+    color: $primary;
+    &:hover{
+        color: rgb(51, 125, 253);
+    }
+}
+
+.order{
+    color: $primary;
+}

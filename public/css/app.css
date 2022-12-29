@@ -316,3 +316,14 @@ section.login a:hover {
   border-radius: 50px !important;
   padding-left: 14px !important;
 }
+
+a.link {
+  color: #FE5F1E;
+}
+a.link:hover {
+  color: rgb(51, 125, 253);
+}
+
+.order {
+  color: #FE5F1E;
+}
