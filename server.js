@@ -24,6 +24,7 @@ const flash = require("express-flash");
 // const MongoDbStore = require("connect-mongo")
 const MongoDbStore = require("connect-mongo")(session)
 const passport = require("passport")
+const Emitter = require('events')
 
 // app.use(session({ secret: 'somevalue' }))
 //above line is used to resolve the error on the web page
@@ -54,7 +55,9 @@ let mongoStore = new MongoDbStore({
   //this will create the sessions collection in our database
 });
 
-
+// Event emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter', eventEmitter)
 
 //will use flash as a middleware
 app.use(flash());
@@ -123,7 +126,7 @@ app.set("view engine", "ejs");
 require("./routes/web")(app);
 
 //2.
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   // it will always print the same line
   //to hardcore it we can use
 
@@ -143,3 +146,24 @@ app.listen(PORT, () => {
 //now to run this scripts present in the package.json file we simply need to type "npm run dev" or "yarn dev"
 
 //now whenever we make any changes the server will restart automatically
+
+
+// Socket
+
+const io = require('socket.io')(server)
+io.on('connection', (socket) => {
+      // Join
+      // console.log(socket.io)
+      socket.on('join', (orderId) => {
+        socket.join(orderId)
+      })
+})
+
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+})
+
