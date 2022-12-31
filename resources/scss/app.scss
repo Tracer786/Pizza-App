@@ -35,9 +35,9 @@ section.hero{
     background: $secondary;
 }
 
-nav{
-    background: $sec_first;
-}
+// nav{
+//     background: $sec_first;
+// }
 
 .size
 {
@@ -51,8 +51,8 @@ nav{
    &:hover{
      background: $primary;
      border-color: $pure;
-    //  color:$pure;
-     color:black;
+     color:$pure;
+    //  color:black;
    } 
    &:focus{
     outline: none;
@@ -76,7 +76,7 @@ section.cart{
 
 section.login{
     background: $secondary;
-    min-height: calc(100vh - 93px);
+    min-height: calc(100vh - 86px);
     a{
         color:$primary;
         &:hover{
@@ -86,30 +86,32 @@ section.login{
 }
 
 .noty_theme__mint{
-    width: 200px;
+    // width: 200px;
     border-radius: 50px!important;
-    padding-left: 14px!important;
+    // padding-left: 14px!important;
+    padding-left: 8px!important;
     // border-color: rgb(0, 21, 255);
     // border-width: 2px;
 }
 
 a.link{
     color: $primary;
-    &:hover{
-        color: rgb(51, 125, 253);
-    }
+    // &:hover{
+    //     color: rgb(51, 125, 253);
+    // }
 }
 
-.order{
-    color: $primary;
-}
+// .order{
+//     color: $primary;
+// }
 
 section.status {
     background: $secondary;
     min-height: calc(100vh - 86px);
 }
 .status-box {
-    padding: 20px 0 0;
+    // padding: 20px 0 0;
+    padding: 60px 0 0;
 }
 .status-box ul {
     margin-left: 84px;
@@ -209,4 +211,21 @@ section.status {
     float: right;
     font-size: 14px;
     margin-top: 8px;
+}
+
+@media(max-width:1060px) {
+    .container {
+        max-width: 90%;
+    }
+    table {
+       display: block;
+       overflow-x: auto;
+       white-space: nowrap;
+    }
+}
+
+@media(max-width: 768px) {
+    .status-box ul li span:before {
+        font-size: 34px;
+    }
 }

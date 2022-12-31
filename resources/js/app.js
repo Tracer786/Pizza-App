@@ -81,7 +81,7 @@ updateStatus(order);
 
 // Socket
 let socket = io()
-initAdmin(socket)
+// initAdmin(socket)
 
 // Join
 if(order) {

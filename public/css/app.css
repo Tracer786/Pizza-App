@@ -263,10 +263,6 @@ section.hero {
   background: #f6ebeb;
 }
 
-nav {
-  background: #ffbfbf;
-}
-
 .size {
   background: #f6ebeb;
 }
@@ -279,7 +275,7 @@ nav {
 .add-to-cart:hover {
   background: #FE5F1E;
   border-color: #fff;
-  color: black;
+  color: #fff;
 }
 .add-to-cart:focus {
   outline: none;
@@ -302,7 +298,7 @@ section.cart .amount {
 
 section.login {
   background: #f6ebeb;
-  min-height: calc(100vh - 93px);
+  min-height: calc(100vh - 86px);
 }
 section.login a {
   color: #FE5F1E;
@@ -312,19 +308,11 @@ section.login a:hover {
 }
 
 .noty_theme__mint {
-  width: 200px;
   border-radius: 50px !important;
-  padding-left: 14px !important;
+  padding-left: 8px !important;
 }
 
 a.link {
-  color: #FE5F1E;
-}
-a.link:hover {
-  color: rgb(51, 125, 253);
-}
-
-.order {
   color: #FE5F1E;
 }
 
@@ -334,7 +322,7 @@ section.status {
 }
 
 .status-box {
-  padding: 20px 0 0;
+  padding: 60px 0 0;
 }
 
 .status-box ul {
@@ -433,4 +421,20 @@ section.status {
   float: right;
   font-size: 14px;
   margin-top: 8px;
+}
+
+@media (max-width: 1060px) {
+  .container {
+    max-width: 90%;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 768px) {
+  .status-box ul li span:before {
+    font-size: 34px;
+  }
 }

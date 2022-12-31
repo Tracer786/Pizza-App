@@ -4,6 +4,7 @@ const moment = require("moment");
 function orderController() {
   return {
     store(req, res) {
+      //Validate request
       // console.log(req.body)
       const { phone, address } = req.body;
       if (!phone || !address) {

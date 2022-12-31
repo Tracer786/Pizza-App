@@ -15,8 +15,10 @@ const menuSchema = new Schema({
 })
 // this is the schema of the document in the database
 
-const Menu = mongoose.model('Menu',menuSchema)
+// const Menu = mongoose.model('Menu',menuSchema)
 //name of model - 'Menu' first letter should always be capital
 //name of collection created in database would be the plural of the model
 
- module.exports = Menu
+//  module.exports = Menu
+
+module.exports = mongoose.model('Menu',menuSchema)

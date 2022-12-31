@@ -1,9 +1,9 @@
+const Menu = require("../../models/menu");
 function homeController() {
   //factory functions - pattern for writing functions
   //it is general object creation
 
   //if we want to fetch the data we need the model
-  const Menu = require("../../models/menu");
   return {
     //grouping methods
     //index is the key

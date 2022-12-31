@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 // express is the function used
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
+//this is used to remove the warning in the terminal
 const session = require("express-session");
 const flash = require("express-flash");
 // const MongoDbStore = require("connect-mongo")
@@ -35,16 +36,20 @@ const Emitter = require('events')
 //snippet for connection to MongoDB that we use every time
 
 // const url = "mongodb://localhost/pizza";
-const url = "mongodb://0.0.0.0:27017/pizza";
 // mongoose.connect(url).then(() => console.log("Connected!"));
-mongoose.connect(url,{useNewUrlParser: true}).then(() => console.log("Connected!"));
 // mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
-const connection = mongoose.connection;
 // connection.once('open', () => {
 //   console.log('Database connected...');
 // }).catch(err => {
 //   console.log('Connection failed...')
 // });
+
+
+// Connecting to DataBase
+const url = "mongodb://0.0.0.0:27017/pizza";
+mongoose.connect(url,{useNewUrlParser: true}).then(() => console.log("Connected!"));
+const connection = mongoose.connection;
+
 
 
 //session store
@@ -72,16 +77,16 @@ app.use(session({
   //secret is used to encrypt the session
   //sessions does not work without cookies
   resave: false,
-  // saveUninitialized: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: mongoStore,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 }
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } //24hrs
   // cookie: { maxAge: 1000 *15 }
   // cookie age in ms
 }))
 
 //passport config
-const passportInit = require('./app/config/passport')
+const passportInit = require('./app/config/passport');
+const { stringify } = require('querystring');
 passportInit(passport)
 app.use(passport.initialize())
 app.use(passport.session())
@@ -124,6 +129,9 @@ app.set("view engine", "ejs");
 //the route of the / is inside the web.js
 
 require("./routes/web")(app);
+app.use((req, res) => {
+  res.status(404).render('errors/404');
+})
 
 //2.
 const server = app.listen(PORT, () => {
