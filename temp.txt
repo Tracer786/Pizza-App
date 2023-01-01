@@ -14,3 +14,5 @@ If we are using NPM we will get the entry as package-json.lock
 
 
 to add all the node modules if you have deleted them just write the command 'yarn install'
+
+yarn production is used to minify the content in app.js and app.css before deployment

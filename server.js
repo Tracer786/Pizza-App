@@ -46,8 +46,9 @@ const Emitter = require('events')
 
 
 // Connecting to DataBase
-const url = "mongodb://0.0.0.0:27017/pizza";
-mongoose.connect(url,{useNewUrlParser: true}).then(() => console.log("Connected!"));
+// const url = "mongodb://0.0.0.0:27017/pizza";
+// mongoose.connect(url,{useNewUrlParser: true}).then(() => console.log("Connected!"));
+mongoose.connect(process.env.MONGO_CONNECTION_URL,{useNewUrlParser: true}).then(() => console.log("Connected!"));
 const connection = mongoose.connection;
 
 
@@ -70,7 +71,8 @@ app.use(flash());
 //session config
 //session library works as a middleware
 app.use(session({
-  secret: 'abc'||process.env.COOKIE_SECRET, 
+  // secret: 'abc'||process.env.COOKIE_SECRET, 
+  secret: process.env.COOKIE_SECRET, 
   //we generally store the encrypted code outside our main code
   // for this we require the package dotenv
   //to access the .env we have to import the module
